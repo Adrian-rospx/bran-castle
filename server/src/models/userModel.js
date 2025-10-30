@@ -11,6 +11,6 @@ export async function createUser(data) {
 }
 
 export async function deleteUser(user_id) {
-    
+    user_id = Number(user_id);
     return prisma.user.delete( {where: {id : user_id}} );
 }
