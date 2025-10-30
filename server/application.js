@@ -2,7 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 
 import prisma from "./src/models/database.js";
-import apiRouter from "./src/routers/apiRouter.js";
+import postRouter from "./src/routers/postRouter.js";
+import userRouter from "./src/routers/userRouter.js";
 
 dotenv.config({quiet: true});
 
@@ -10,14 +11,17 @@ const PORT = process.env.PORT || 3000;
 
 const application = express();
 
+// middleware configuration
 application.use(express.json());
 
-application.use("/api", apiRouter);
+// mount routers
+application.use("/api/posts", postRouter);
+application.use("/api/users", userRouter);
 
 // start port listener
 application.listen(PORT, () => {
     const date = new Date();
-    const localDateTime = date.toLocaleDateString();
+    const localDateTime = date.toLocaleString();
     const timezone = -date.getTimezoneOffset() / 60;
     const timezoneFormatted = Intl.NumberFormat("en-US", 
         {signDisplay: "exceptZero"}
@@ -36,6 +40,5 @@ function terminateProcess() {
     process.exit(1);
 }
 
-process.on("uncaughtException", terminateProcess);
 process.on("SIGINT", terminateProcess);
 process.on("SIGTERM", terminateProcess);
