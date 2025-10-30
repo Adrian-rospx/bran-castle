@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import prisma from "./src/models/database.js";
+import { errorHandler } from "./src/errorHandling.js";
 import postRouter from "./src/routers/postRouter.js";
 import userRouter from "./src/routers/userRouter.js";
 
@@ -17,6 +18,9 @@ application.use(express.json());
 // mount routers
 application.use("/api/posts", postRouter);
 application.use("/api/users", userRouter);
+
+// error handler
+application.use(errorHandler);
 
 // start port listener
 application.listen(PORT, () => {

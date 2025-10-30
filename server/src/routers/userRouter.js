@@ -1,25 +1,25 @@
 import { Router } from "express";
-import { createUser, getUser } from "../models/userModel.js";
+import * as userService from "../services/userService.js";
 
 const userRouter = Router();
 
-userRouter.get("/:id", async (req, res) => {
+userRouter.get("/:id", async (req, res, next) => {
     const user_id = req.params.id;
-
-    const user = await getUser(user_id);
-    console.log(user);
-
-    res.status(200).json(user);
+    try {
+        const user = await userService.getUser(user_id);
+        res.status(200).json(user);
+    } catch (err) {
+        throw err;
+    }
 });
 
-userRouter.post("/", async (req, res) => {
-    const {name, password} = req.body;
-    const data = {name, password};
-
-    const user = await createUser(data);
-    console.log(user);
-
-    res.status(201).json(user);
+userRouter.post("/register", async (req, res, next) => {
+    try {
+        const user = await userService.registerUser(req.body);
+        res.status(201).json(user);
+    } catch (err) {
+        throw err;
+    }
 })
 
 export default userRouter;
