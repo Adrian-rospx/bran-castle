@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 
 import prisma from "./src/models/database.js";
+import apiRouter from "./src/routers/apiRouter.js";
 
 dotenv.config({quiet: true});
 
@@ -9,6 +10,11 @@ const PORT = process.env.PORT || 3000;
 
 const application = express();
 
+application.use(express.json());
+
+application.use("/api", apiRouter);
+
+// start port listener
 application.listen(PORT, () => {
     const date = new Date();
     const localDateTime = date.toLocaleDateString();
@@ -22,7 +28,7 @@ application.listen(PORT, () => {
         `UTC ${timezoneFormatted}:00 GMT\x1b[0m`);
 });
 
-
+// end message
 function terminateProcess() {
     prisma.$disconnect();
     console.log(`\x1b[31m` + 
@@ -30,5 +36,6 @@ function terminateProcess() {
     process.exit(1);
 }
 
+process.on("uncaughtException", terminateProcess);
 process.on("SIGINT", terminateProcess);
 process.on("SIGTERM", terminateProcess);
