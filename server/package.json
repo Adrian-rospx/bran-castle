@@ -1,0 +1,21 @@
+{
+  "name": "bran-castle",
+  "version": "1.0.0",
+  "description": "Halloween themed blog platform",
+  "main": "application.js",
+  "scripts": {
+    "start": "node application.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Adrian-rospx",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@prisma/client": "^6.18.0",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "prisma": "^6.18.0",
+    "redis": "^5.9.0"
+  }
+}

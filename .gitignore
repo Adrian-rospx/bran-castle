@@ -1,0 +1,9 @@
+# environment
+.env
+
+# dependencies
+*/node_modules
+
+# build artifacts
+*/generated/prisma
+
