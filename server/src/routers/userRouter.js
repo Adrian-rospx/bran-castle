@@ -3,7 +3,7 @@ import * as userService from "../services/userService.js";
 
 const userRouter = Router();
 
-userRouter.get("/:id", async (req, res, next) => {
+userRouter.get("/:id", async (req, res) => {
     const user_id = req.params.id;
     try {
         const user = await userService.getUser(user_id);
@@ -13,7 +13,7 @@ userRouter.get("/:id", async (req, res, next) => {
     }
 });
 
-userRouter.post("/register", async (req, res, next) => {
+userRouter.post("/register", async (req, res) => {
     try {
         const user = await userService.registerUser(req.body);
         res.status(201).json(user);

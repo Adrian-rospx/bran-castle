@@ -1,3 +1,5 @@
+
+// Server error convinience class
 export class ServerError extends Error {
     constructor(message, name) {
         super(message);
@@ -9,16 +11,16 @@ export class ServerError extends Error {
 export function errorHandler(err, req, res, next) {
     console.error(err);
 
-    if (err.name === "Not found") {
-        return res.status(404).json({error: err.message});
-    } else if (err.name === "Bad request") {
-        return res.status(400).json({error: err.message});
-    } else if (err.name === "Conflict") {
-        return res.status(409).json({error: err.message});
-    } else if (err.name === "Prisma error"){
-        return res.status(500).json({error: err.message});
-    } else {
-        return res.status(500).json({error: "Server error"});
+    switch (err.name) {
+        case "Not found":
+            return res.status(404).json({error: err.message});
+        case "Bad request":
+            return res.status(400).json({error: err.message});
+        case "Conflict":
+            return res.status(409).json({error: err.message});
+        case "Prisma error":
+            return res.status(500).json({error: err.message});
+        default:
+            return res.status(500).json({error: "Server error"});
     }
-
 }
