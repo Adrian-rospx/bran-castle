@@ -1,6 +1,7 @@
 
 export default function Header() {
     return(
+    <>
         <header>
             <div id="header-container">
                 <div id="header-main-title">
@@ -8,5 +9,7 @@ export default function Header() {
                 </div>
             </div>
         </header>
+        <div className="filler-line"/>
+    </>
     );
 }

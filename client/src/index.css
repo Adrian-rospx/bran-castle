@@ -4,4 +4,24 @@
 
 body {
     margin: 0;
+    
+    background-color: #210F37;
+    color: #DCA06D;
+
+    background-image: url("bran-background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#root {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.filler-line {
+    min-height: 10px;
+    background-color: #A55B4B;
 }
