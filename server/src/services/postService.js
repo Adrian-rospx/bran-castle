@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+
 import { ServerError } from "../errorHandling.js";
 import * as postModel from "../models/postModel.js";
 
@@ -5,10 +7,10 @@ export async function getPosts() {
     const posts = await postModel.getPosts();
     return posts;
 }
-export async function getPost(id) {
-    id = Number(id);
+export async function getPost(post_id) {
+    post_id = Number(post_id);
     try {
-        const post = await postModel.getPost(id);
+        const post = await postModel.getPost(post_id);
         return post;
     } catch (err) {
         if (err.code === "P2025")
@@ -18,11 +20,15 @@ export async function getPost(id) {
     }
 }
 
-export async function createPost(data) {
-    let {title, content, author_id} = data;
-    author_id = Number(author_id);
+export async function createPost(data, token) {
+    // get author id
+    token = jwt.decode(token);
+    const author_id = Number(token.sub);
 
-    if (!title || !content || !author_id)
+    // verify data
+    const {title, content} = data;
+
+    if (!title || !content)
         throw new ServerError("Title and content required!", "Bad request");
 
     data = {title, content, author_id};
@@ -36,15 +42,23 @@ export async function createPost(data) {
     }
 }
 
-export async function updatePost(id, data) {
-    let {title, content, author_id} = data;
-    author_id = Number(author_id);
-    id = Number(id);
-
-    if (!title || !content || !author_id)
+export async function updatePost(post_id, data, token) {
+    token = jwt.decode(token);
+    const author_id = Number(token.sub);
+    
+    const {title, content} = data;
+    
+    if (!title || !content)
         throw new ServerError("Title and content required!", "Bad request");
+    
+    post_id = Number(post_id);
 
-    data = {id, title, content, author_id};
+    // verify owner
+    const post = await getPost(post_id);
+    if (post.author_id != author_id)
+        throw new ServerError("Cannot access post", "Forbidden");
+
+    data = {id: post_id, title, content, author_id};
 
     try{
         const result = await postModel.updatePost(data);
@@ -55,10 +69,19 @@ export async function updatePost(id, data) {
     }
 }
 
-export async function deletePost(id) {
-    id = Number(id);
+export async function deletePost(post_id, token) {
+    token = jwt.decode(token);
+    const author_id = Number(token.sub);
+
+    post_id = Number(post_id);
+
+    // verify owner
+    const post = await getPost(post_id);
+    if (post.author_id != author_id)
+        throw new ServerError("Cannot access resource", "Forbidden");
+    
     try {
-        const result = await postModel.deletePost(id);
+        const result = await postModel.deletePost(post_id);
     } catch (err) {
         if (err.code === "P2025")
             throw new ServerError("Post not found", "Not found");

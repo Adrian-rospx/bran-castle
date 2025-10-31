@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as postService from "../services/postService.js";
+import { requireAuth } from "../middleware/authentication.js";
 
 const postRouter = Router();
 
@@ -9,30 +10,35 @@ postRouter.get("/", async (req, res) => {
     res.status(200).json(posts);
 });
 postRouter.get("/:id", async (req, res) => {
-    const id = req.params.id;
-    const post = await postService.getPost(id);
+    const post_id = req.params.id;
+
+    const post = await postService.getPost(post_id);
 
     res.status(200).json(post);
 });
 
-postRouter.post("/", async (req, res) => {
-    const result = await postService.createPost(req.body);
+postRouter.post("/", requireAuth,  async (req, res) => {
+    const token = req.headers.authorization;
+
+    const result = await postService.createPost(req.body, token);
 
     res.status(201).json(result);
 });
 
-postRouter.patch("/:id", async (req, res) => {
-    const id = req.params.id;
+postRouter.patch("/:id", requireAuth, async (req, res) => {
+    const token = req.headers.authorization;
+    const post_id = req.params.id;
     
-    const result = await postService.updatePost(id, req.body);
+    const result = await postService.updatePost(post_id, req.body, token);
 
     res.status(200).json(result);
 })
 
-postRouter.delete("/:id", async (req, res) => {
-    const id = req.params.id;
+postRouter.delete("/:id", requireAuth, async (req, res) => {
+    const token = req.headers.authorization;
+    const post_id = req.params.id;
 
-    await postService.deletePost(id);
+    await postService.deletePost(post_id, token);
     
     res.status(204).send();
 });

@@ -16,6 +16,8 @@ export function errorHandler(err, req, res, next) {
             return res.status(400).json({error: err.message});
         case "Unauthorized":
             return res.status(401).json({error: err.message});
+        case "Forbidden":
+            return res.status(403).json({error: err.message});
         case "Not found":
             return res.status(404).json({error: err.message});
         case "Conflict":
