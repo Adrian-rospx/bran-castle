@@ -21,5 +21,13 @@ userRouter.post("/register", async (req, res) => {
         throw err;
     }
 })
+userRouter.post("/login", async (req, res) => {
+    try {
+        const token = await userService.loginUser(req.body);
+        res.status(200).json({token});
+    } catch (err) {
+        throw err;
+    }
+})
 
 export default userRouter;
