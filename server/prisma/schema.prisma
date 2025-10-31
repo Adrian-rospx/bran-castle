@@ -12,18 +12,28 @@ datasource db {
 }
 
 model User {
-  id        Int       @id @default(autoincrement())
+  id        Int       @id
   name      String    @db.VarChar(80) @unique
   password  String
   created_at DateTime @default(now())
+  role      Role?     @default(USER)
   posts     Post[]
+
+  @@map("users")
 }
 
 model Post {
-  id          Int       @id @default(autoincrement())
+  id          Int       @id 
   title       String    @db.VarChar(120)
   content     String?
   created_at  DateTime  @default(now())
   author      User?     @relation(fields: [author_id], references: [id])
   author_id   Int?
+
+  @@map("posts")
+}
+
+enum Role {
+  USER    @map("user")
+  ADMIN   @map("admin")
 }

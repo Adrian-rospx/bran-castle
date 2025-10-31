@@ -19,7 +19,7 @@ export async function getPost(id) {
 }
 
 export async function createPost(data) {
-    const {title, content, author_id} = data;
+    let {title, content, author_id} = data;
     author_id = Number(author_id);
 
     if (!title || !content || !author_id)
@@ -37,7 +37,7 @@ export async function createPost(data) {
 }
 
 export async function updatePost(id, data) {
-    const {title, content, author_id} = data;
+    let {title, content, author_id} = data;
     author_id = Number(author_id);
     id = Number(id);
 
@@ -48,12 +48,11 @@ export async function updatePost(id, data) {
 
     try{
         const result = await postModel.updatePost(data);
+        return result;
     } catch (err) {
         // to be tested
         throw err;
     }
-
-    return result;
 }
 
 export async function deletePost(id) {
