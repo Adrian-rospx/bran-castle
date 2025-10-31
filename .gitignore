@@ -1,9 +1,14 @@
 # environment
 .env
 
-# dependencies
-*/node_modules
-
 # build artifacts
-*/generated/prisma
+**/node_modules
+**/dist
+**/dist-ssr
+*.local
+**/generated/prisma
 
+# Logs
+*/logs
+.log
+*/npm-debug.log*
