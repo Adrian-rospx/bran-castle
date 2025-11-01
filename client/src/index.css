@@ -1,13 +1,15 @@
 :root {
     font-family: Georgia, 'Times New Roman', Times, serif;
+    
+    text-shadow: 1px 3px 3px black;
+    color: #DCA06D;
 }
 
 body {
     margin: 0;
     
     background-color: #210F37;
-    color: #DCA06D;
-
+    
     background-image: url("bran-background.jpg");
     background-size: cover;
     background-position: center;
@@ -16,12 +18,15 @@ body {
 
 #root {
     height: 100vh;
-
+    
     display: flex;
     flex-direction: column;
 }
 
-.filler-line {
-    min-height: 10px;
-    background-color: #A55B4B;
+/* Secondary link colors (derived from the color pallete) */
+a:link {
+    color: #BC6ABf;
+}
+a:visited {
+    color: #A65542;
 }

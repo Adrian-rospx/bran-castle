@@ -1,18 +1,18 @@
 
 /* Header and Footer styles */
 header, footer {
-    padding: 15px 30px;
+    padding: 0 30px;
     display: flex;
     justify-content: center;
 
     background-color: #210F37;
 
     text-align: center;
-    text-shadow: 1px 3px 3px black;
-    font-size: large;
 }
 #header-container, #footer-container {
-    max-width: 1200px;
+    margin: 10px 0;
+    
+    max-width: 1080px;
     width: 100%;
 
     display: flex;
@@ -20,6 +20,9 @@ header, footer {
 }
 
 /* Header */
+header {
+    border-bottom: 7px solid #A55B4B;
+}
 #header-main-title {
     max-width: 600px;
     width: 100%;
@@ -33,6 +36,9 @@ header h1 {
 }
 
 /* Footer */
+footer {
+    border-top: 7px solid #A55B4B;
+}
 #footer-grid {
     width: 100%;
 
@@ -41,10 +47,25 @@ header h1 {
 }
 .footer-list {
     margin: 0 5px;
+    padding: 0 5px;
+
+    border-color: #A55B4B;
+    border-width: 5px 0;
+    border-style: solid;
+
     background-color: #4F1C51;
 }
 
 /* Main content styling */
 main {
     flex-grow: 1;
+    display: flex;
+    justify-content: center;
+}
+#content-container {
+    margin: 20px 0;
+    padding: 0 20px;
+
+    max-width: 1200px;
+    width: 100%;
 }

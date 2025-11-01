@@ -9,7 +9,6 @@ export default function Header() {
                 </div>
             </div>
         </header>
-        <div className="filler-line"/>
     </>
     );
 }
