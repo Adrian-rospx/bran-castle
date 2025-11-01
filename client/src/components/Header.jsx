@@ -1,6 +1,6 @@
 import AuthHeader from "../features/AuthHeader.jsx"
 
-export default function Header({logged, signupBtn, loginBtn}) {
+export default function Header({logged, signupBtn, loginBtn, logoutBtn}) {
     return(
     <>
         <header>
@@ -11,7 +11,11 @@ export default function Header({logged, signupBtn, loginBtn}) {
                     <h1>Bran Castle</h1>
                 </div>
 
-                <AuthHeader logged={logged} signupBtn={signupBtn} loginBtn={loginBtn}/>
+                <AuthHeader logged={logged} 
+                    signupBtn={signupBtn} 
+                    loginBtn={loginBtn} 
+                    logoutBtn={logoutBtn}
+                />
             </div>
         </header>
     </>

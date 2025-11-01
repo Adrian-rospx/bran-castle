@@ -11,15 +11,23 @@ function App() {
     const [loginState, setLoginState] = useState("off");
     const [authToken, setAuthToken] = useState(null);
 
+    // handle header auth box
     const signupBtn = () => {
         setLoginState("Sign Up");
     }
     const loginBtn = () => {
         setLoginState("Log In");
     }
+    const logoutBtn = () => {
+        setAuthToken(null);
+        setIsLogged(false);
+    }
+
+    // handle signin and login
     const submitLogin = (username, password) => {
         const signupUser = async () => {
-            const response = await fetch("http://localhost:5000/api/users/register", {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/users/register`, {
                 method: "POST",
                 body: JSON.stringify({name: username, password}),
                 headers: {
@@ -31,7 +39,8 @@ function App() {
                 throw new Error("Signup unsuccessful");
         }
         const loginUser = async () => {
-            const response = await fetch("http://localhost:5000/api/users/login", {
+            const response = await fetch(
+                `${import.meta.env.VITE_API_URL}/api/users/login`, {
                 method: "POST",
                 body: JSON.stringify({name: username, password}),
                 headers: {
@@ -62,7 +71,11 @@ function App() {
 
     return (
         <>
-            <Header logged={isLogged} signupBtn={signupBtn} loginBtn={loginBtn}/>
+            <Header logged={isLogged} 
+                signupBtn={signupBtn} 
+                loginBtn={loginBtn}
+                logoutBtn={logoutBtn}
+            />
 
             {loginState !== "off" ? 
                 <LoginScreen loginState={loginState} submitLogin={submitLogin}/> : 

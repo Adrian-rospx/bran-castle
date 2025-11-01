@@ -1,6 +1,5 @@
 import express from "express";
 import dotenv from "dotenv";
-import cors from "cors";
 
 import prisma from "./src/models/database.js";
 import { errorHandler } from "./src/errorHandling.js";
@@ -16,13 +15,14 @@ const application = express();
 // middleware configuration
 application.use(express.json());
 
-// application.use(cors({
-//     origin: "http://localhost:5173"
-// }));
-
-// mount routers
+// mount api routers
 application.use("/api/posts", postRouter);
 application.use("/api/users", userRouter);
+
+// mount web router
+application.use("/", express.static("../client/dist", {
+    redirect: "index.html"
+}));
 
 // error handler
 application.use(errorHandler);

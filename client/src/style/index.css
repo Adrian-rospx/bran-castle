@@ -10,7 +10,7 @@ body {
     
     background-color: #210F37;
     
-    background-image: url("bran-background.jpg");
+    background-image: url("../assets/bran-background.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
