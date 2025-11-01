@@ -1,3 +1,4 @@
+import Post from "../features/Post";
 
 export default function Content() {
     
@@ -5,6 +6,12 @@ export default function Content() {
     <main>
         <div id="content-container">
             <h1>Bran Castle Blog</h1>
+
+            <Post/>
+            
+            <Post/>
+            
+            <Post/>
         </div>
     </main>
     );
