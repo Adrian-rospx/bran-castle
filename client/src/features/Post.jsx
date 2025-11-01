@@ -1,21 +1,22 @@
-import "../Post.css";
+import "../style/Post.css";
 
-export default function Post() {
+export default function Post(props) {
+    const {title, content, timestamp, author} = props;
 
     return (
         <article className="post">
             <div className="post-header">
-                <h2>Insert title here</h2>
+                <h2> {title} </h2>
                 <div className="post-info">
                     <p>
-                        Author <br />
-                        Date xxxxxx <br />
+                        Author: {author} <br />
+                        {timestamp} <br />
                     </p>
                 </div>
             </div>
             <div className="post-content">
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus est, tempore culpa reprehenderit explicabo placeat natus quam quod voluptatem mollitia deserunt. Molestias, itaque qui nihil in dicta deserunt commodi dolore?
+                    {content}
                 </p>
             </div>
         </article>
