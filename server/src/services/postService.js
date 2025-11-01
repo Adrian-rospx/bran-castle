@@ -33,13 +33,8 @@ export async function createPost(data, token) {
 
     data = {title, content, author_id};
 
-    try {
-        const result = await postModel.createPost(data);
-        return result;
-    } catch (err) {
-        // to be tested
-        throw err;
-    }
+    const result = await postModel.createPost(data);
+    return result;
 }
 
 export async function updatePost(post_id, data, token) {
@@ -60,13 +55,8 @@ export async function updatePost(post_id, data, token) {
 
     data = {id: post_id, title, content, author_id};
 
-    try{
-        const result = await postModel.updatePost(data);
-        return result;
-    } catch (err) {
-        // to be tested
-        throw err;
-    }
+    const result = await postModel.updatePost(data);
+    return result;
 }
 
 export async function deletePost(post_id, token) {
@@ -80,12 +70,5 @@ export async function deletePost(post_id, token) {
     if (post.author_id != author_id)
         throw new ServerError("Cannot access resource", "Forbidden");
     
-    try {
-        const result = await postModel.deletePost(post_id);
-    } catch (err) {
-        if (err.code === "P2025")
-            throw new ServerError("Post not found", "Not found");
-        else 
-            throw err;
-    }
+    await postModel.deletePost(post_id);
 }
