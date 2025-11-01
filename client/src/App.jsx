@@ -8,14 +8,67 @@ import LoginScreen from './features/LoginScreen.jsx';
 
 function App() {
     const [isLogged, setIsLogged] = useState(false);
+    const [loginState, setLoginState] = useState("off");
+    const [authToken, setAuthToken] = useState(null);
 
-    
+    const signupBtn = () => {
+        setLoginState("Sign Up");
+    }
+    const loginBtn = () => {
+        setLoginState("Log In");
+    }
+    const submitLogin = (username, password) => {
+        const signupUser = async () => {
+            const response = await fetch("http://localhost:5000/api/users/register", {
+                method: "POST",
+                body: JSON.stringify({name: username, password}),
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            });
+            
+            if (response.status !== 201)
+                throw new Error("Signup unsuccessful");
+        }
+        const loginUser = async () => {
+            const response = await fetch("http://localhost:5000/api/users/login", {
+                method: "POST",
+                body: JSON.stringify({name: username, password}),
+                headers: {
+                    "Content-Type":"application/json"
+                }
+            });
+            
+            if (response.status !== 200)
+                throw new Error("Login unsuccessful");
+
+            const {token} = await response.json();
+            
+            setAuthToken(token);
+            setIsLogged(true);
+        }
+
+        try {
+            if (loginState === "Sign Up")
+                signupUser();
+                loginUser();
+            if (loginState === "Log In")
+                loginUser();
+            setLoginState("off");
+        } catch (err) {
+            window.alert(err);
+        }
+    }
 
     return (
         <>
-            <Header logged={isLogged}/>
+            <Header logged={isLogged} signupBtn={signupBtn} loginBtn={loginBtn}/>
 
-            <LoginScreen/>
+            {loginState !== "off" ? 
+                <LoginScreen loginState={loginState} submitLogin={submitLogin}/> : 
+                <></>
+            }
+
             <Content/>
 
             <Footer/>
