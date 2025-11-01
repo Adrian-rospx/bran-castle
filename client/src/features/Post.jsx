@@ -10,7 +10,7 @@ export default function Post(props) {
                 <div className="post-info">
                     <p>
                         Author: {author} <br />
-                        {timestamp} <br />
+                        Date: {new Date(timestamp).toLocaleDateString()} <br />
                     </p>
                 </div>
             </div>

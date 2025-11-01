@@ -7,7 +7,7 @@ export async function getPosts() {
         return prisma.post.findMany({
             include: {
                 author: {
-                    omit: {password}
+                    omit: {password: true}
                 }
             }
         });
@@ -21,7 +21,7 @@ export async function getPost(id) {
             where: {id},
             include: {
                 author: {
-                    omit: {password}
+                    omit: {password: true}
                 }
             }
         } );

@@ -6,6 +6,8 @@ import Footer from './components/Footer.jsx';
 import Content from './components/Content.jsx';
 
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    
 
     return (
         <>

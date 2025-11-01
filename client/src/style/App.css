@@ -16,7 +16,7 @@ header, footer {
     width: 100%;
 
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 /* Header */
@@ -24,15 +24,47 @@ header {
     border-bottom: 7px solid #A55B4B;
 }
 #header-main-title {
-    max-width: 600px;
-    width: 100%;
+    margin: 0 10px;
+    padding: 0 100px;
 
     background-color: #4F1C51;
 
     font-size: larger;
 }
 header h1 {
-    margin: 10px;
+    margin: 12px;
+}
+/* Header auth box */
+#header-balancer {
+    width: 250px;
+}
+#header-auth-container {
+    width: 250px;
+    display: flex;
+    justify-content:space-evenly;
+}
+.header-auth-button {
+    margin: 0 5px;
+    width: 100%;
+    min-width: 80px;
+
+    background-color: #4F1C51;
+    
+    border-color: #A55B4B;
+    border-width: 5px 0;
+    border-style: solid;
+
+    color: #DCA06D;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: medium;
+}
+.header-auth-button:hover {
+    color:#8F6139;
+    cursor: pointer;
+}
+.header-auth-button:active {
+    font-weight: bold;
+    background-color: #371438;
 }
 
 /* Footer */

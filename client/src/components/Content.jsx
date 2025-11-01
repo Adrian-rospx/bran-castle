@@ -21,11 +21,13 @@ export default function Content() {
     return (
         <main>
             <div id="content-container">
+                
                 <h1>Bran Castle Blog</h1>
+
                 {posts.map((post, index, arr) => 
                     <Post key={index} title={post.title}
                         content={post.content}
-                        author={post.author_id}
+                        author={post.author.name}
                         timestamp={post.created_at}
                     />
                 )}
