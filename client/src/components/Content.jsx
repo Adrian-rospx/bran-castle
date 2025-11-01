@@ -7,6 +7,10 @@ export default function Content() {
     useEffect(() => {
         const fetchPosts = async () => {
             const response = await fetch("http://localhost:5000/api/posts");
+            
+            if (response.status !== 200)
+                throw new Error("Could not fetch");
+
             const result = await response.json();
             setPosts(result);
         }
@@ -14,7 +18,7 @@ export default function Content() {
         try {
             fetchPosts();
         } catch (err) {
-            console.log(err);
+            window.alert("Couldn't fetch posts from server");
         }
     }, []);
 

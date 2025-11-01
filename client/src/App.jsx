@@ -4,15 +4,18 @@ import './style/App.css';
 import Header from './components/Header.jsx';
 import Footer from './components/Footer.jsx';
 import Content from './components/Content.jsx';
+import LoginScreen from './features/LoginScreen.jsx';
 
 function App() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLogged, setIsLogged] = useState(false);
+
     
 
     return (
         <>
-            <Header/>
+            <Header logged={isLogged}/>
 
+            <LoginScreen/>
             <Content/>
 
             <Footer/>

@@ -1,6 +1,6 @@
-import Auth from "../features/Auth.jsx"
+import AuthHeader from "../features/AuthHeader.jsx"
 
-export default function Header() {
+export default function Header({logged}) {
     return(
     <>
         <header>
@@ -11,7 +11,7 @@ export default function Header() {
                     <h1>Bran Castle</h1>
                 </div>
 
-                <Auth/>
+                <AuthHeader logged={logged}/>
             </div>
         </header>
     </>

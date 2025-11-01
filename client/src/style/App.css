@@ -41,12 +41,13 @@ header h1 {
 #header-auth-container {
     width: 250px;
     display: flex;
-    justify-content:space-evenly;
+    justify-content: space-evenly;
 }
 .header-auth-button {
     margin: 0 5px;
     width: 100%;
     min-width: 80px;
+    max-width: 120px;
 
     background-color: #4F1C51;
     
@@ -94,6 +95,8 @@ main {
     flex-grow: 1;
     display: flex;
     justify-content: center;
+
+    font-size: large;
 }
 #content-container {
     margin: 20px 0;
